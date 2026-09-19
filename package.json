@@ -3,7 +3,6 @@
   "version": "4.0.0",
   "private": true,
   "scripts": {
-    "build": "echo 'Build complete'",
     "start": "python server.py"
   }
 }
