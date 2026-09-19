@@ -1,0 +1,1060 @@
+{
+  "app": {
+    "name": "SwarmOS",
+    "tagline": "Welcome to SwarmOS",
+    "subtitle": "One task. Many real devices. Coordinated intelligently."
+  },
+  "demoUser": {
+    "email": "demo@swarmos.ai",
+    "password": "swarmos",
+    "name": "Demo Owner"
+  },
+  "devices": [
+    {
+      "id": "owner-laptop",
+      "name": "HP Victus 16",
+      "type": "Laptop",
+      "role": "Owner + Worker",
+      "status": "Online",
+      "cpu": "AMD Ryzen 7 7840HS",
+      "gpu": "NVIDIA RTX 3050 6 GB",
+      "ram": "16 GB",
+      "ramGB": 16,
+      "battery": 82,
+      "temperature": 39,
+      "network": "Wi\u2011Fi 6 \u2022 920 Mbps",
+      "networkMbps": 920,
+      "load": 34,
+      "storage": "148 GB free",
+      "score": 82,
+      "cpuScore": 86,
+      "gpuScore": 78,
+      "thermalScore": 82,
+      "executors": [
+        "DaVinci Export",
+        "FFmpeg Media",
+        "Python Tests",
+        "HTTP Download",
+        "Photo Analysis"
+      ]
+    },
+    {
+      "id": "worker-laptop",
+      "name": "ASUS TUF Gaming F15",
+      "type": "Laptop",
+      "role": "Worker",
+      "status": "Online",
+      "cpu": "Intel Core i7-13620H",
+      "gpu": "NVIDIA RTX 4060 8 GB",
+      "ram": "32 GB",
+      "ramGB": 32,
+      "battery": 91,
+      "temperature": 36,
+      "network": "Wi\u2011Fi 6 \u2022 1.34 Gbps",
+      "networkMbps": 1340,
+      "load": 12,
+      "storage": "312 GB free",
+      "score": 97,
+      "cpuScore": 95,
+      "gpuScore": 98,
+      "thermalScore": 92,
+      "executors": [
+        "DaVinci Export",
+        "FFmpeg Media",
+        "Python Tests",
+        "Node Tests",
+        "HTTP Download",
+        "OCR Preview",
+        "Photo Analysis"
+      ]
+    },
+    {
+      "id": "iqoo-phone",
+      "name": "iQOO Z10 Turbo",
+      "type": "Phone",
+      "role": "Worker",
+      "status": "Online",
+      "cpu": "MediaTek Dimensity 8400",
+      "gpu": "Mali GPU + Mobile NPU",
+      "ram": "12 GB",
+      "ramGB": 12,
+      "battery": 74,
+      "temperature": 38,
+      "network": "Wi\u2011Fi 6 \u2022 780 Mbps",
+      "networkMbps": 780,
+      "load": 24,
+      "storage": "41 GB free",
+      "score": 73,
+      "cpuScore": 79,
+      "gpuScore": 68,
+      "thermalScore": 80,
+      "executors": [
+        "Mobile Media",
+        "HTTP Download",
+        "Photo Analysis",
+        "Light OCR"
+      ]
+    },
+    {
+      "id": "spare-phone",
+      "name": "iQOO Neo Backup",
+      "type": "Phone",
+      "role": "Worker",
+      "status": "Offline",
+      "cpu": "Snapdragon 8-series",
+      "gpu": "Mobile GPU / NPU",
+      "ram": "8 GB",
+      "ramGB": 8,
+      "battery": 48,
+      "temperature": 35,
+      "network": "Offline",
+      "networkMbps": 0,
+      "load": 0,
+      "storage": "22 GB free",
+      "score": 54,
+      "cpuScore": 70,
+      "gpuScore": 60,
+      "thermalScore": 90,
+      "executors": [
+        "HTTP Download",
+        "Photo Analysis"
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "video",
+      "name": "Video Export",
+      "icon": "\u25b6",
+      "group": "supported",
+      "badge": "SUPPORTED DEMO",
+      "summary": "Read a supported editing job, split timeline ranges across compatible devices, render in parallel and merge the results.",
+      "exampleTitle": "30-minute 4K export",
+      "source": "DaVinci Resolve",
+      "size": "30:00 timeline",
+      "requiredExecutor": "SwarmOS media executor",
+      "localEstimate": "34 min",
+      "distributedEstimate": "18m 52s",
+      "saving": "15m 08s",
+      "connectors": [
+        {
+          "id": "davinci",
+          "name": "DaVinci Resolve",
+          "icon": "DR",
+          "status": "SUPPORTED DEMO",
+          "enabled": true,
+          "description": "Read project/timeline metadata and create a distributed export job."
+        },
+        {
+          "id": "premiere",
+          "name": "Adobe Premiere Pro",
+          "icon": "Pr",
+          "status": "COMING SOON",
+          "enabled": false,
+          "description": "Planned connector for Premiere sequences, render ranges and export settings."
+        },
+        {
+          "id": "media-encoder",
+          "name": "Adobe Media Encoder",
+          "icon": "ME",
+          "status": "PLANNED",
+          "enabled": false,
+          "description": "Planned queue connector for distributed encoding jobs."
+        },
+        {
+          "id": "finalcut",
+          "name": "Final Cut Pro",
+          "icon": "FC",
+          "status": "PLANNED",
+          "enabled": false,
+          "description": "Future macOS connector for Final Cut timelines."
+        },
+        {
+          "id": "capcut",
+          "name": "CapCut Desktop",
+          "icon": "CC",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Future project/export connector for supported CapCut workflows."
+        },
+        {
+          "id": "generic-video",
+          "name": "Generic Video / FFmpeg",
+          "icon": "MP4",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Future file-based segmentation and compatible transcoding pipeline."
+        }
+      ],
+      "allocation": [
+        {
+          "device": "HP Victus 16",
+          "range": "00:00 \u2192 05:00",
+          "share": 17,
+          "reason": "Keeps the first chunk locally."
+        },
+        {
+          "device": "ASUS TUF Gaming F15",
+          "range": "05:00 \u2192 22:00",
+          "share": 57,
+          "reason": "Strongest GPU, most RAM and lowest current load."
+        },
+        {
+          "device": "iQOO Z10 Turbo",
+          "range": "22:00 \u2192 30:00",
+          "share": 26,
+          "reason": "Compatible mobile executor with battery and thermal limits."
+        }
+      ],
+      "unit": {
+        "kind": "time",
+        "total": 1800,
+        "label": "30:00 timeline"
+      }
+    },
+    {
+      "id": "tests",
+      "name": "Software Testing",
+      "icon": "\u2713",
+      "group": "supported",
+      "badge": "SUPPORTED DEMO",
+      "summary": "Detect the project/test runner, discover real test IDs, distribute compatible batches and collect PASS / FAIL / Error.",
+      "exampleTitle": "PaymentApp \u2014 600 tests",
+      "source": "Project folder",
+      "size": "600 tests / 5 GB project",
+      "requiredExecutor": "Python + pytest",
+      "localEstimate": "17m 10s",
+      "distributedEstimate": "9m 34s",
+      "saving": "7m 36s",
+      "connectors": [
+        {
+          "id": "local-project",
+          "name": "Local Project Folder",
+          "icon": "DIR",
+          "status": "SUPPORTED DEMO",
+          "enabled": true,
+          "description": "Choose a project folder and detect pytest / JUnit / Jest clues."
+        },
+        {
+          "id": "github",
+          "name": "GitHub Repository",
+          "icon": "GH",
+          "status": "COMING SOON",
+          "enabled": false,
+          "description": "Future repository import, branch selection and test-runner detection."
+        },
+        {
+          "id": "gitlab",
+          "name": "GitLab Repository",
+          "icon": "GL",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Future GitLab source connector with branch/commit selection."
+        },
+        {
+          "id": "bitbucket",
+          "name": "Bitbucket",
+          "icon": "BB",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Future Bitbucket repository connector."
+        },
+        {
+          "id": "drive-project",
+          "name": "Google Drive Project",
+          "icon": "GD",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Future project package import from Google Drive."
+        },
+        {
+          "id": "zip-project",
+          "name": "ZIP Project",
+          "icon": "ZIP",
+          "status": "PLANNED",
+          "enabled": false,
+          "description": "Future secure ZIP project intake."
+        }
+      ],
+      "allocation": [
+        {
+          "device": "HP Victus 16",
+          "range": "Tests 001 \u2192 200",
+          "share": 33,
+          "reason": "Medium current load."
+        },
+        {
+          "device": "ASUS TUF Gaming F15",
+          "range": "Tests 201 \u2192 500",
+          "share": 50,
+          "reason": "32 GB RAM, strongest CPU, 12% load."
+        },
+        {
+          "device": "iQOO Z10 Turbo",
+          "range": "Tests 501 \u2192 600",
+          "share": 17,
+          "reason": "Only a compatible subset if the runtime is available."
+        }
+      ],
+      "unit": {
+        "kind": "count",
+        "total": 600,
+        "label": "600 tests"
+      }
+    },
+    {
+      "id": "download",
+      "name": "Smart Transfer / Download",
+      "icon": "\u2193",
+      "group": "supported",
+      "badge": "SUPPORTED DEMO",
+      "summary": "Connect a remote source, split a large file into byte ranges, download parts in parallel, return them and merge on the owner.",
+      "exampleTitle": "Demo_4K_Video.mp4",
+      "source": "Website / URL",
+      "size": "6 GB",
+      "requiredExecutor": "HTTP byte-range downloader",
+      "localEstimate": "12m 40s",
+      "distributedEstimate": "6m 05s",
+      "saving": "6m 35s",
+      "connectors": [
+        {
+          "id": "website",
+          "name": "Website / Direct URL",
+          "icon": "URL",
+          "status": "SUPPORTED DEMO",
+          "enabled": true,
+          "description": "Use a legal direct-download URL that supports HTTP byte ranges."
+        },
+        {
+          "id": "google-drive",
+          "name": "Google Drive",
+          "icon": "GD",
+          "status": "COMING SOON",
+          "enabled": false,
+          "description": "Future Drive file picker and authenticated range-download connector."
+        },
+        {
+          "id": "onedrive",
+          "name": "OneDrive",
+          "icon": "OD",
+          "status": "COMING SOON",
+          "enabled": false,
+          "description": "Future Microsoft cloud source connector."
+        },
+        {
+          "id": "dropbox",
+          "name": "Dropbox",
+          "icon": "DB",
+          "status": "COMING SOON",
+          "enabled": false,
+          "description": "Future Dropbox file connector."
+        },
+        {
+          "id": "s3",
+          "name": "Amazon S3",
+          "icon": "S3",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Future object-storage connector for selected buckets/objects."
+        },
+        {
+          "id": "cloud-server",
+          "name": "Cloud / Private Server",
+          "icon": "CL",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Future authenticated server connector."
+        },
+        {
+          "id": "shared-link",
+          "name": "Shared Download Link",
+          "icon": "\u2197",
+          "status": "PLANNED",
+          "enabled": false,
+          "description": "Future supported shared-link ingestion."
+        }
+      ],
+      "allocation": [
+        {
+          "device": "HP Victus 16",
+          "range": "0.0 \u2192 1.0 GB",
+          "share": 17,
+          "reason": "Keeps a smaller local portion."
+        },
+        {
+          "device": "ASUS TUF Gaming F15",
+          "range": "1.0 \u2192 4.2 GB",
+          "share": 53,
+          "reason": "Best network and storage combination."
+        },
+        {
+          "device": "iQOO Z10 Turbo",
+          "range": "4.2 \u2192 6.0 GB",
+          "share": 30,
+          "reason": "Fast connection and sufficient battery."
+        }
+      ],
+      "unit": {
+        "kind": "gb",
+        "total": 6.0,
+        "label": "6 GB file"
+      }
+    },
+    {
+      "id": "photos",
+      "name": "Photo Intelligence",
+      "icon": "\u25a7",
+      "group": "future",
+      "badge": "FUTURE PREVIEW",
+      "summary": "Distribute photo analysis such as category sorting, face matching, blur checks and duplicate detection.",
+      "exampleTitle": "300-photo event folder",
+      "source": "Local / cloud photo folder",
+      "size": "300 photos",
+      "requiredExecutor": "Photo analysis worker",
+      "localEstimate": "11m 20s",
+      "distributedEstimate": "4m 45s",
+      "saving": "6m 35s",
+      "connectors": [
+        {
+          "id": "photo-folder",
+          "name": "Local Photo Folder",
+          "icon": "IMG",
+          "status": "FUTURE PREVIEW",
+          "enabled": false,
+          "description": "Select a local photo folder."
+        },
+        {
+          "id": "google-photos",
+          "name": "Google Photos",
+          "icon": "GP",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select albums/photos from Google Photos."
+        },
+        {
+          "id": "photo-drive",
+          "name": "Google Drive",
+          "icon": "GD",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select only the files/folder needed from Google Drive."
+        },
+        {
+          "id": "photo-onedrive",
+          "name": "OneDrive",
+          "icon": "OD",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select only the files/folder needed from OneDrive."
+        },
+        {
+          "id": "photo-dropbox",
+          "name": "Dropbox",
+          "icon": "DB",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select only the files/folder needed from Dropbox."
+        }
+      ],
+      "allocation": [
+        {
+          "device": "HP Victus 16",
+          "range": "Photos 001 \u2192 100",
+          "share": 33,
+          "reason": "Keeps first batch locally."
+        },
+        {
+          "device": "ASUS TUF Gaming F15",
+          "range": "Photos 101 \u2192 230",
+          "share": 43,
+          "reason": "Fastest device handles the largest batch."
+        },
+        {
+          "device": "iQOO Z10 Turbo",
+          "range": "Photos 231 \u2192 300",
+          "share": 24,
+          "reason": "Runs only compatible lightweight analysis."
+        }
+      ],
+      "unit": {
+        "kind": "count",
+        "total": 300,
+        "label": "300 photos"
+      }
+    },
+    {
+      "id": "ocr",
+      "name": "Document OCR & Search",
+      "icon": "\u25a4",
+      "group": "future",
+      "badge": "FUTURE PREVIEW",
+      "summary": "Split PDF or scanned pages for OCR, indexing and searchable output generation.",
+      "exampleTitle": "500 scanned pages",
+      "source": "PDF / scanned documents",
+      "size": "500 pages",
+      "requiredExecutor": "OCR worker",
+      "localEstimate": "19m 00s",
+      "distributedEstimate": "8m 20s",
+      "saving": "10m 40s",
+      "connectors": [
+        {
+          "id": "ocr-local",
+          "name": "Local PDFs / Images",
+          "icon": "PDF",
+          "status": "FUTURE PREVIEW",
+          "enabled": false,
+          "description": "Select PDFs/images for OCR processing."
+        },
+        {
+          "id": "ocr-drive",
+          "name": "Google Drive",
+          "icon": "GD",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select only the files/folder needed from Google Drive."
+        },
+        {
+          "id": "ocr-onedrive",
+          "name": "OneDrive",
+          "icon": "OD",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select only the files/folder needed from OneDrive."
+        },
+        {
+          "id": "ocr-dropbox",
+          "name": "Dropbox",
+          "icon": "DB",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select only the files/folder needed from Dropbox."
+        },
+        {
+          "id": "ocr-scanner",
+          "name": "Scanner Import",
+          "icon": "SCN",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Import pages directly from a scanner."
+        }
+      ],
+      "allocation": [
+        {
+          "device": "HP Victus 16",
+          "range": "Pages 001 \u2192 150",
+          "share": 30,
+          "reason": "Local OCR and indexing."
+        },
+        {
+          "device": "ASUS TUF Gaming F15",
+          "range": "Pages 151 \u2192 400",
+          "share": 50,
+          "reason": "Highest CPU/RAM capability."
+        },
+        {
+          "device": "iQOO Z10 Turbo",
+          "range": "Pages 401 \u2192 500",
+          "share": 20,
+          "reason": "Lightweight page OCR preview."
+        }
+      ],
+      "unit": {
+        "kind": "count",
+        "total": 500,
+        "label": "500 pages"
+      }
+    },
+    {
+      "id": "ai-batch",
+      "name": "AI Batch Inference",
+      "icon": "\u25c7",
+      "group": "future",
+      "badge": "FUTURE PREVIEW",
+      "summary": "Batch independent AI jobs across compatible GPU/NPU devices and merge predictions.",
+      "exampleTitle": "2,000 independent jobs",
+      "source": "Batch queue",
+      "size": "2,000 jobs",
+      "requiredExecutor": "Compatible AI runtime",
+      "localEstimate": "42m 00s",
+      "distributedEstimate": "16m 30s",
+      "saving": "25m 30s",
+      "connectors": [
+        {
+          "id": "ai-json",
+          "name": "JSON / CSV Queue",
+          "icon": "JSON",
+          "status": "FUTURE PREVIEW",
+          "enabled": false,
+          "description": "Load a batch queue from JSON/CSV."
+        },
+        {
+          "id": "ai-folder",
+          "name": "Local Dataset Folder",
+          "icon": "DIR",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Choose local files/folders for this workload."
+        },
+        {
+          "id": "ai-drive",
+          "name": "Google Drive",
+          "icon": "GD",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select only the files/folder needed from Google Drive."
+        },
+        {
+          "id": "ai-s3",
+          "name": "Amazon S3",
+          "icon": "S3",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select bucket/object prefix for distributed work."
+        },
+        {
+          "id": "ai-api",
+          "name": "API Queue",
+          "icon": "API",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Connect a queued inference API."
+        }
+      ],
+      "allocation": [
+        {
+          "device": "HP Victus 16",
+          "range": "Jobs 001 \u2192 400",
+          "share": 20,
+          "reason": "Local baseline batch."
+        },
+        {
+          "device": "ASUS TUF Gaming F15",
+          "range": "Jobs 401 \u2192 1500",
+          "share": 55,
+          "reason": "Strongest GPU gets most work."
+        },
+        {
+          "device": "iQOO Z10 Turbo",
+          "range": "Jobs 1501 \u2192 2000",
+          "share": 25,
+          "reason": "NPU/mobile-compatible jobs only."
+        }
+      ],
+      "unit": {
+        "kind": "count",
+        "total": 2000,
+        "label": "2,000 jobs"
+      }
+    },
+    {
+      "id": "transcode",
+      "name": "Media Transcode",
+      "icon": "\u25eb",
+      "group": "future",
+      "badge": "FUTURE PREVIEW",
+      "summary": "Convert a large media library into target formats by distributing independent files.",
+      "exampleTitle": "80 mixed media files",
+      "source": "Media folder",
+      "size": "80 files / 48 GB",
+      "requiredExecutor": "FFmpeg-compatible worker",
+      "localEstimate": "58m 00s",
+      "distributedEstimate": "23m 10s",
+      "saving": "34m 50s",
+      "connectors": [
+        {
+          "id": "media-local",
+          "name": "Local Media Folder",
+          "icon": "VID",
+          "status": "FUTURE PREVIEW",
+          "enabled": false,
+          "description": "Select a media folder for batch work."
+        },
+        {
+          "id": "ffmpeg",
+          "name": "FFmpeg Queue",
+          "icon": "FF",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Create a future FFmpeg transcode queue."
+        },
+        {
+          "id": "handbrake",
+          "name": "HandBrake Queue",
+          "icon": "HB",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Create a future HandBrake queue."
+        },
+        {
+          "id": "media-drive",
+          "name": "Google Drive",
+          "icon": "GD",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select only the files/folder needed from Google Drive."
+        },
+        {
+          "id": "media-nas",
+          "name": "NAS / Shared Folder",
+          "icon": "NAS",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Connect a local NAS/shared folder."
+        }
+      ],
+      "allocation": [
+        {
+          "device": "HP Victus 16",
+          "range": "Files 01 \u2192 20",
+          "share": 25,
+          "reason": "Local queue."
+        },
+        {
+          "device": "ASUS TUF Gaming F15",
+          "range": "Files 21 \u2192 65",
+          "share": 56,
+          "reason": "GPU acceleration available."
+        },
+        {
+          "device": "iQOO Z10 Turbo",
+          "range": "Files 66 \u2192 80",
+          "share": 19,
+          "reason": "Mobile-safe formats only."
+        }
+      ],
+      "unit": {
+        "kind": "count",
+        "total": 120,
+        "label": "120 clips"
+      }
+    },
+    {
+      "id": "dataset",
+      "name": "Dataset Processing",
+      "icon": "\u2261",
+      "group": "future",
+      "badge": "FUTURE PREVIEW",
+      "summary": "Distribute independent preprocessing, validation, checksum, resize or transform batches.",
+      "exampleTitle": "10,000-item dataset",
+      "source": "Dataset folder",
+      "size": "10,000 items",
+      "requiredExecutor": "Dataset worker",
+      "localEstimate": "36m 00s",
+      "distributedEstimate": "13m 40s",
+      "saving": "22m 20s",
+      "connectors": [
+        {
+          "id": "data-local",
+          "name": "Local Dataset Folder",
+          "icon": "DATA",
+          "status": "FUTURE PREVIEW",
+          "enabled": false,
+          "description": "Select a local dataset folder."
+        },
+        {
+          "id": "data-drive",
+          "name": "Google Drive",
+          "icon": "GD",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select only the files/folder needed from Google Drive."
+        },
+        {
+          "id": "data-s3",
+          "name": "Amazon S3",
+          "icon": "S3",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select bucket/object prefix for distributed work."
+        },
+        {
+          "id": "data-zip",
+          "name": "ZIP Dataset",
+          "icon": "ZIP",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Upload a ZIP package for this workload."
+        }
+      ],
+      "allocation": [
+        {
+          "device": "HP Victus 16",
+          "range": "Items 0001 \u2192 2500",
+          "share": 25,
+          "reason": "Local validation batch."
+        },
+        {
+          "device": "ASUS TUF Gaming F15",
+          "range": "Items 2501 \u2192 8000",
+          "share": 55,
+          "reason": "High memory and CPU throughput."
+        },
+        {
+          "device": "iQOO Z10 Turbo",
+          "range": "Items 8001 \u2192 10000",
+          "share": 20,
+          "reason": "Lightweight transforms."
+        }
+      ],
+      "unit": {
+        "kind": "count",
+        "total": 10000,
+        "label": "10,000 items"
+      }
+    },
+    {
+      "id": "build",
+      "name": "Code Build & Compile",
+      "icon": "{}",
+      "group": "future",
+      "badge": "FUTURE PREVIEW",
+      "summary": "Distribute independent build targets, modules or architecture-specific compile jobs.",
+      "exampleTitle": "Multi-target application build",
+      "source": "Source repository",
+      "size": "8 build targets",
+      "requiredExecutor": "Compatible build runtime",
+      "localEstimate": "22m 00s",
+      "distributedEstimate": "9m 10s",
+      "saving": "12m 50s",
+      "connectors": [
+        {
+          "id": "build-local",
+          "name": "Local Source Folder",
+          "icon": "DIR",
+          "status": "FUTURE PREVIEW",
+          "enabled": false,
+          "description": "Choose local files/folders for this workload."
+        },
+        {
+          "id": "build-github",
+          "name": "GitHub",
+          "icon": "GH",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select repository, branch and commit for processing."
+        },
+        {
+          "id": "build-gitlab",
+          "name": "GitLab",
+          "icon": "GL",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select GitLab repository/branch for processing."
+        },
+        {
+          "id": "build-zip",
+          "name": "ZIP Source",
+          "icon": "ZIP",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Upload a ZIP package for this workload."
+        }
+      ],
+      "allocation": [
+        {
+          "device": "HP Victus 16",
+          "range": "Targets 1 \u2192 2",
+          "share": 25,
+          "reason": "Local primary targets."
+        },
+        {
+          "device": "ASUS TUF Gaming F15",
+          "range": "Targets 3 \u2192 7",
+          "share": 55,
+          "reason": "Strong CPU handles most builds."
+        },
+        {
+          "device": "iQOO Z10 Turbo",
+          "range": "Target 8",
+          "share": 20,
+          "reason": "Only compatible mobile build target."
+        }
+      ],
+      "unit": {
+        "kind": "count",
+        "total": 24,
+        "label": "24 build targets"
+      }
+    },
+    {
+      "id": "compression",
+      "name": "Batch Compression",
+      "icon": "ZIP",
+      "group": "future",
+      "badge": "FUTURE PREVIEW",
+      "summary": "Compress independent folders or archives in parallel and return completed outputs.",
+      "exampleTitle": "120 archive jobs",
+      "source": "Folder queue",
+      "size": "120 folders",
+      "requiredExecutor": "Compression worker",
+      "localEstimate": "31m 00s",
+      "distributedEstimate": "12m 20s",
+      "saving": "18m 40s",
+      "connectors": [
+        {
+          "id": "zip-local",
+          "name": "Local Folder / Files",
+          "icon": "ZIP",
+          "status": "FUTURE PREVIEW",
+          "enabled": false,
+          "description": "Upload a ZIP package for this workload."
+        },
+        {
+          "id": "zip-drive",
+          "name": "Google Drive",
+          "icon": "GD",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select only the files/folder needed from Google Drive."
+        },
+        {
+          "id": "zip-onedrive",
+          "name": "OneDrive",
+          "icon": "OD",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select only the files/folder needed from OneDrive."
+        },
+        {
+          "id": "zip-dropbox",
+          "name": "Dropbox",
+          "icon": "DB",
+          "status": "FUTURE",
+          "enabled": false,
+          "description": "Select only the files/folder needed from Dropbox."
+        }
+      ],
+      "allocation": [
+        {
+          "device": "HP Victus 16",
+          "range": "Folders 001 \u2192 30",
+          "share": 25,
+          "reason": "Local batch."
+        },
+        {
+          "device": "ASUS TUF Gaming F15",
+          "range": "Folders 031 \u2192 95",
+          "share": 54,
+          "reason": "High CPU throughput."
+        },
+        {
+          "device": "iQOO Z10 Turbo",
+          "range": "Folders 096 \u2192 120",
+          "share": 21,
+          "reason": "Lightweight archives only."
+        }
+      ],
+      "unit": {
+        "kind": "count",
+        "total": 800,
+        "label": "800 files"
+      }
+    }
+  ],
+  "photoSamples": [
+    {
+      "file": "assets/photo_mountain.svg",
+      "label": "Mountains",
+      "meta": "Sharp \u2022 Landscape"
+    },
+    {
+      "file": "assets/photo_flower.svg",
+      "label": "Flowers",
+      "meta": "Sharp \u2022 Macro"
+    },
+    {
+      "file": "assets/photo_people.svg",
+      "label": "People",
+      "meta": "Face match candidate"
+    },
+    {
+      "file": "assets/photo_city.svg",
+      "label": "City",
+      "meta": "Night \u2022 Architecture"
+    },
+    {
+      "file": "assets/photo_tree.svg",
+      "label": "Trees",
+      "meta": "Nature \u2022 Green"
+    },
+    {
+      "file": "assets/photo_bird.svg",
+      "label": "Birds",
+      "meta": "Wildlife \u2022 Motion"
+    }
+  ],
+  "history": [
+    {
+      "task": "DaVinci 4K Export",
+      "local": "34m",
+      "swarmos": "18m 52s",
+      "saved": "15m 08s",
+      "status": "Completed"
+    },
+    {
+      "task": "PaymentApp Test Suite",
+      "local": "17m 10s",
+      "swarmos": "9m 34s",
+      "saved": "7m 36s",
+      "status": "Completed"
+    },
+    {
+      "task": "6 GB Smart Download",
+      "local": "12m 40s",
+      "swarmos": "6m 05s",
+      "saved": "6m 35s",
+      "status": "Completed"
+    }
+  ],
+  "scheduler": {
+    "agent": "Utility-Based Scheduling Agent",
+    "checks": [
+      "CPU / GPU / NPU capability",
+      "Available RAM",
+      "Current device load",
+      "Temperature / thermal state",
+      "Battery level",
+      "Network speed and stability",
+      "Available storage",
+      "Task / executor compatibility",
+      "Estimated transfer time",
+      "Estimated processing time"
+    ],
+    "cost": "Transfer Time + Execution Time + Result Return Time + Merge / Setup Time + Resource Penalty"
+  },
+  "receiverProfiles": [
+    {
+      "id": "iqoo",
+      "name": "iQOO Z10 Turbo",
+      "type": "Phone",
+      "cpu": "MediaTek Dimensity 8400",
+      "gpu": "Mali GPU + Mobile NPU",
+      "ram": "12 GB",
+      "battery": 74,
+      "temperature": 38,
+      "network": "Wi\u2011Fi 6 \u2022 780 Mbps"
+    },
+    {
+      "id": "tuf",
+      "name": "ASUS TUF Gaming F15",
+      "type": "Laptop",
+      "cpu": "Intel Core i7-13620H",
+      "gpu": "NVIDIA RTX 4060 8 GB",
+      "ram": "32 GB",
+      "battery": 91,
+      "temperature": 36,
+      "network": "Wi\u2011Fi 6 \u2022 1.34 Gbps"
+    },
+    {
+      "id": "victus",
+      "name": "HP Victus 16",
+      "type": "Laptop",
+      "cpu": "AMD Ryzen 7 7840HS",
+      "gpu": "NVIDIA RTX 3050 6 GB",
+      "ram": "16 GB",
+      "battery": 82,
+      "temperature": 39,
+      "network": "Wi\u2011Fi 6 \u2022 920 Mbps"
+    }
+  ]
+}

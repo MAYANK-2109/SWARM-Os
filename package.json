@@ -1,0 +1,8 @@
+{
+  "name": "swarmos-advanced-color-demo",
+  "version": "4.0.0",
+  "private": true,
+  "scripts": {
+    "start": "python server.py"
+  }
+}
