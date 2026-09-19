@@ -4,16 +4,15 @@ Interactive sender/receiver hackathon prototype with a colorful 3D dashboard, op
 
 ## Run in VS Code
 
-1. Extract the ZIP.
-2. Open the `SwarmOS_Advanced_Color_App_v4` folder in VS Code.
-3. Open **Terminal → New Terminal**.
-4. Run:
+1. Open the `SwarmOS_Advanced_Color_App_v4` folder in VS Code.
+2. Open **Terminal → New Terminal**.
+3. Run:
 
 ```powershell
 python server.py
 ```
 
-5. Open `http://localhost:5173`.
+4. Open `http://localhost:5173`.
 
 For a second device on the same Wi-Fi, the terminal prints a LAN URL such as `http://192.168.x.x:5173`. Windows Firewall may ask for permission; allow private-network access if you want the phone/laptop receiver demo.
 
